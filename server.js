@@ -91,6 +91,40 @@ app.use('/member', require('./routes/member'));
 
 
 
+// Data for testing
+const VaccineType = require('./models/VaccineType');
+VaccineType.findOne({name: 'Pfizer-BioNTech'}, function (err, obj) { 
+    if(err) console.log(err);
+    if(obj === null) {
+        new VaccineType({
+            name: 'Pfizer-BioNTech',
+            minAge: 12,
+            numberOfDoes: 2
+        }).save();
+    }
+});
+
+VaccineType.findOne({name: 'Moderna'}, function (err, obj) { 
+    if(err) console.log(err);
+    if(obj === null) {
+        new VaccineType({
+            name: 'Moderna',
+            minAge: 18,
+            numberOfDoes: 2
+        }).save();
+    }
+});
+
+VaccineType.findOne({name: 'Johnson & Johnson’s Janssen'}, function (err, obj) { 
+    if(err) console.log(err);
+    if(obj === null) {
+        new VaccineType({
+            name: 'Johnson & Johnson’s Janssen',
+            minAge: 18,
+            numberOfDoes: 1
+        }).save();
+    }
+});
 
 
 app.listen(port, function () {
