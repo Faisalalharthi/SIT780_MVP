@@ -37,7 +37,7 @@
                                         <th scope="col">Min Age</th>
                                         <th scope="col">Count</th>
                                         <th scope="col">Expire Date</th>
-                                        <th scope="col"></th>
+                                        <!-- <th scope="col"></th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,11 +49,12 @@
                                             <td> <%= vaccines[i].vaccineType.minAge %> </td>
                                             <td> <%= vaccines[i].count %> </td>
                                             <td> <%= vaccines[i].expireDate.toISOString().split("T")[0] %> </td>
-                                            <td class="text-right">
+                                            <!-- <td class="text-right">
                                                 <a class="btn btn-secondary" href="#">Details</a>
                                                 <a class="btn btn-info" href="#">Edit</a>
                                                 <a class="btn btn-danger" href="#">Delete</a>
                                             </td>
+                                        -->
                                         </tr>
                                         <% } %>
                                 </tbody>

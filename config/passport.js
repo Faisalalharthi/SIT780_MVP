@@ -1,7 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 
 // Models
-const User = require('../models/user');
+const User = require('../models/User');
 const userService = require('../services/userService');
 
 // =========================================================================
@@ -69,7 +69,6 @@ module.exports = function(passport) {
                 email: email,
                 // hash/encrypt password before storing it in the database
                 password: userService.generateHash(password),
-                nickname: req.body.nickname,
                 role: req.body.role
             }).save(function(err, savedUser) {
                 if (err) {

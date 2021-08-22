@@ -9,7 +9,8 @@ const passport = require('passport')
 const dotenv = require('dotenv');
 // MongoDB Driver
 const mongoose = require('mongoose')
-
+// Secrets
+const secrets = require('./config/secrets');
 // configure enviroment variables
 dotenv.config();
 
@@ -17,7 +18,7 @@ dotenv.config();
 const port = 3000;
 
 // Connect to MongoDB
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(secrets.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // CONNECTION EVENTS
 mongoose.connection.once('connected', function () {
@@ -51,13 +52,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     name: 'sessionId',
-    secret: process.env.SECRET,
+    secret: secrets.SECRET,
     saveUninitialized: false, // don't create sessions for not logged in users
     resave: false, //don't save session if unmodified
 
     // Where to store session data
     store: MongoStore.create({
-        mongoUrl: process.env.DB_URI
+        mongoUrl: secrets.DB_URI
     }),
 
     // cookies settings

@@ -4,14 +4,17 @@ const userService = require('../services/userService')
 
 //  Signup ====================================================================
 router.get('/signup', function (req, res) {
-	res.render('signup');
+	if (req.user) {
+		if (userService.isMember(req.user)) return res.redirect('/member/')
+		if (userService.isManager(req.user)) return res.redirect('/manager/')
+	}
+	return res.render('signup');
 });
 
 router.post('/signup', passport.authenticate('local-signup', {
 	failureRedirect: '/auth/signup',
 	failureFlash: false // allow flash messages
 }), function (req, res, next) {
-	// TODO: redirect to /manager or /member
 	if (userService.isMember(req.user)) return res.redirect('/member/')
 	if (userService.isManager(req.user)) return res.redirect('/manager/')
 	return res.redirect('/')
